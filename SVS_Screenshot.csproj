@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>SVS_Screenshot</AssemblyName>
+    <RootNamespace>SVS_Screenshot</RootNamespace>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <DebugType>none</DebugType>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GameDir>C:\ILLGAMES\SamabakeScramble</GameDir>
+    <InteropDir>$(GameDir)\BepInEx\SamabakeScramble\interop</InteropDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="$(GameDir)\BepInEx\core\BepInEx.Core.dll" Private="false" />
+    <Reference Include="$(GameDir)\BepInEx\core\BepInEx.Unity.IL2CPP.dll" Private="false" />
+    <Reference Include="$(GameDir)\BepInEx\core\Il2CppInterop.Runtime.dll" Private="false" />
+    <Reference Include="$(GameDir)\BepInEx\core\0Harmony.dll" Private="false" />
+    <Reference Include="$(GameDir)\BepInEx\plugins\ConfigurationManager\BepInEx.KeyboardShortcut.dll" Private="false" />
+    <Reference Include="$(InteropDir)\Il2Cppmscorlib.dll" Private="false" />
+    <Reference Include="$(InteropDir)\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="$(InteropDir)\UnityEngine.ImageConversionModule.dll" Private="false" />
+    <Reference Include="$(InteropDir)\UnityEngine.ScreenCaptureModule.dll" Private="false" />
+    <Reference Include="$(InteropDir)\UnityEngine.InputLegacyModule.dll" Private="false" />
+    <Reference Include="$(InteropDir)\UnityEngine.UIModule.dll" Private="false" />
+    <Reference Include="$(InteropDir)\Unity.RenderPipelines.Universal.Runtime.dll" Private="false" />
+  </ItemGroup>
+
+  <Target Name="CopyToGame" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GameDir)\BepInEx\plugins\SVS_Screenshot" />
+  </Target>
+</Project>
