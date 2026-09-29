@@ -7,6 +7,7 @@ A screenshot plugin for **SamabakeScramble** (ILLGames), similar to the screensh
 This is a standalone plugin for SamabakeScramble only. You don't need the HoneyCome version installed. If you also play HoneyCome, it has its own separate version: [HC_Screenshot](https://github.com/amiawrappsy/HC_Screenshot).
 
 ## Features
+<img width="1283" height="766" alt="image" src="https://github.com/user-attachments/assets/98140302-7521-4907-90ba-aa3fc136c6ca" />
 
 - **High-resolution renders** at any size up to your GPU's limit (usually 16384 px), regardless of window size.
 - **Supersampling** (1–4×) for smooth, anti-aliased edges.
