@@ -4,7 +4,7 @@ A screenshot plugin for **SamabakeScramble** (ILLGames), similar to the screensh
 
 > **AI disclosure:** This plugin was written with AI assistance (Claude Opus 5.5, via Claude Code). I directed the work and tested it in-game, but the code was AI-generated.
 
-This is a standalone plugin for SamabakeScramble only. You don't need the HoneyCome version installed. If you also play HoneyCome, it has its own separate version: [HC_Screenshot](https://github.com/amiawrappsy/HC_Screenshot).
+This is a standalone plugin for SamabakeScramble only. You don't need any of the other versions installed. If you also play other ILLGames titles, they have their own separate versions: [HC_Screenshot](https://github.com/amiawrappsy/HC_Screenshot) (HoneyCome and DigitalCraft) and [AC_Screenshot](https://github.com/amiawrappsy/AC_Screenshot) (Aicomi).
 
 ## Features
 <img width="1283" height="766" alt="image" src="https://github.com/user-attachments/assets/98140302-7521-4907-90ba-aa3fc136c6ca" />
