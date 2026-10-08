@@ -16,7 +16,42 @@ namespace SVS_Screenshot
     {
         public const string GUID = "SVS_Screenshot";
         public const string PluginName = "Screenshot Manager";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.1";
+
+        // Present only while an H scene is running; used to skip transparency there
+        internal const string HSceneTypeName = "SV.H.HScene";
+
+        // Scene where rendered screenshots are turned off because they can't reproduce what the screen shows
+        // (only while no dialogue or H scene is running)
+        internal const string NoRenderSceneTypeName = "SV.SimulationScene";
+
+        // Dialogue backgrounds that a re-render can't reproduce: normal (non-transparent) renders during
+        // dialogue capture the screen with the UI hidden instead
+        internal static readonly bool DialogueUsesScreenCapture = true;
+
+        // The dialogue capture hides every screen-overlay canvas (HUDs made only of images) instead of only those
+        // that look like UI. Off where dialogue backgrounds can be overlay canvases (SamabakeScramble).
+        internal static readonly bool DialogueCaptureHidesAllOverlays = false;
+
+        // During dialogue, hide other 3D cameras (SamabakeScramble draws free-roam characters behind the conversation)
+        internal static readonly bool HideOtherCamerasInDialogue = true;
+
+        // Dialogue (ADV) is running when one of these components exists and, if a property is given, it's true.
+        // Transparent renders during dialogue keep only the characters' layers.
+        internal static readonly (string type, string property)[] DialogueIndicators =
+        {};
+
+        // Free-roam scene where transparency is turned off (the map is always in the way), except during dialogue
+        internal const string NoTransparencySceneTypeName = null;
+
+        // Cameras the game uses for specific jobs, read from these components when they exist:
+        // dialogue (ADV) characters, and backgrounds that must never be hidden as UI
+        internal static readonly (string type, string property, GameCameraRole role)[] GameCameras =
+        {
+            ("ADV.ADVScene", "ADVCamera", GameCameraRole.Characters),
+            ("ADV.ADVScene", "BackCamera", GameCameraRole.Background),
+            ("Manager.MapManager", "CameraBackGround", GameCameraRole.Background),
+        };
 
         internal static ManualLogSource Logger;
 
@@ -31,6 +66,8 @@ namespace SVS_Screenshot
         internal static ConfigEntry<bool> Transparency;
         internal static ConfigEntry<bool> TransparencyPostProcessing;
         internal static ConfigEntry<bool> HideUI;
+        internal static ConfigEntry<bool> NoTransparencyInH;
+        internal static ConfigEntry<bool> LogCameraDetails;
 
         internal static ConfigEntry<int> ScreenUpsampling;
 
@@ -65,7 +102,12 @@ namespace SVS_Screenshot
                 "Keep post-processing effects (bloom, color grading and so on) in transparent renders. Takes an extra render pass. " +
                 "Turn it off if semi-transparent edges such as hair look wrong.");
             HideUI = Config.Bind("Render Settings", "Hide camera-space UI", true,
-                "Hide UI canvases and UI overlay cameras attached to the main camera while rendering.");
+                "Hide UI (buttons, sliders and text) while rendering. Image-only layers, such as dialogue scene backgrounds, are kept.");
+            NoTransparencyInH = Config.Bind("Render Settings", "Disable transparency in H scenes", true,
+                "Always render H scenes normally, even when Transparent background is on. The map is always in the way there, so transparency isn't useful.");
+
+            LogCameraDetails = Config.Bind("Advanced", "Log camera details", false,
+                "Write the cameras, canvases and backgrounds used for each rendered screenshot to the BepInEx log. Useful when reporting a scene that renders wrong.");
 
             ScreenUpsampling = Config.Bind("Screen Capture Settings", "Upsampling rate", 1,
                 new ConfigDescription("Multiply the window resolution by this factor for screen captures (the UI is scaled up too).", new AcceptableValueRange<int>(1, 4)));

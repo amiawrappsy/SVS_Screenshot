@@ -3,7 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>SVS_Screenshot</AssemblyName>
     <RootNamespace>SVS_Screenshot</RootNamespace>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
@@ -26,6 +26,7 @@
     <Reference Include="$(InteropDir)\UnityEngine.ScreenCaptureModule.dll" Private="false" />
     <Reference Include="$(InteropDir)\UnityEngine.InputLegacyModule.dll" Private="false" />
     <Reference Include="$(InteropDir)\UnityEngine.UIModule.dll" Private="false" />
+    <Reference Include="$(InteropDir)\UnityEngine.UI.dll" Private="false" />
     <Reference Include="$(InteropDir)\Unity.RenderPipelines.Universal.Runtime.dll" Private="false" />
   </ItemGroup>
 
